@@ -4,9 +4,9 @@ set -euo pipefail
 shopt -s nullglob
 
 # Extract parameters using trurl
-SECRET=$(trurl --url-file - --get '{query:secret}')
-ALGORITHM=$(trurl --url-file - --get '{query:algorithm}')
-DIGITS=$(trurl --url-file - --get '{query:digits}')
+SECRET=$(trurl --url-file - --verify --get '{query:secret}')
+ALGORITHM=$(trurl --url-file - --verify --get '{query:algorithm}')
+DIGITS=$(trurl --url-file - --verify --get '{query:digits}')
 
 # Default values if parameters are missing
 ALGORITHM=${ALGORITHM:-SHA1}  # Default: SHA1
