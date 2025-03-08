@@ -6,7 +6,7 @@ shopt -s nullglob
 if [ -n "$1" ]; then
     URI="$1"
 else
-    URI=$(cat /dev/stdin)
+    URI=$(cat)
     if [ -z "$URI" ]; then
         echo "Usage: $0 'otpclient://totp/Account?secret=SECRET&algorithm=SHA256&digits=8'"
         exit 1
