@@ -3,21 +3,10 @@
 set -euo pipefail
 shopt -s nullglob
 
-if [ -n "$1" ]; then
-    URI="$1"
-else
-    URI=$(cat)
-    if [ -z "$URI" ]; then
-        echo "Usage: $0 'otpclient://totp/Account?secret=SECRET&algorithm=SHA256&digits=8'"
-        exit 1
-    fi
-fi
-
-
 # Extract parameters using trurl
-SECRET=$(trurl --url "$URI" --get '{query:secret}')
-ALGORITHM=$(trurl --url "$URI" --get '{query:algorithm}')
-DIGITS=$(trurl --url "$URI" --get '{query:digits}')
+SECRET=$(trurl --url-file - --get '{query:secret}')
+ALGORITHM=$(trurl --url-file - --get '{query:algorithm}')
+DIGITS=$(trurl --url-file - --get '{query:digits}')
 
 # Default values if parameters are missing
 ALGORITHM=${ALGORITHM:-SHA1}  # Default: SHA1
